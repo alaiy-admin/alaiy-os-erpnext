@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-05-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "marketplace",
+  "channel_sku_id",
+  "competitor_name",
+  "section_pricing",
+  "competitor_price_inr",
+  "competitor_price_usd",
+  "your_price_inr",
+  "buybox_loss_rate",
+  "revenue_impact_inr",
+  "section_meta",
+  "last_checked",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "marketplace",
+   "fieldtype": "Select",
+   "label": "Marketplace",
+   "options": "amazon_in\nshopify\nflipkart\nmeesho\nmanual",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "channel_sku_id",
+   "fieldtype": "Data",
+   "label": "Channel SKU / ASIN"
+  },
+  {
+   "fieldname": "competitor_name",
+   "fieldtype": "Data",
+   "label": "Competitor Name",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_pricing",
+   "fieldtype": "Section Break",
+   "label": "Pricing"
+  },
+  {
+   "fieldname": "competitor_price_inr",
+   "fieldtype": "Currency",
+   "label": "Competitor Price (INR)",
+   "options": "INR"
+  },
+  {
+   "fieldname": "competitor_price_usd",
+   "fieldtype": "Currency",
+   "label": "Competitor Price (USD)",
+   "options": "USD"
+  },
+  {
+   "fieldname": "your_price_inr",
+   "fieldtype": "Currency",
+   "label": "Your Price (INR)",
+   "options": "INR"
+  },
+  {
+   "fieldname": "buybox_loss_rate",
+   "fieldtype": "Float",
+   "label": "Buybox Loss Rate (%)"
+  },
+  {
+   "fieldname": "revenue_impact_inr",
+   "fieldtype": "Currency",
+   "label": "Revenue Impact (INR)",
+   "options": "INR"
+  },
+  {
+   "fieldname": "section_meta",
+   "fieldtype": "Section Break",
+   "label": "Meta"
+  },
+  {
+   "fieldname": "last_checked",
+   "fieldtype": "Datetime",
+   "label": "Last Checked"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notes"
+  }
+ ],
+ "links": [],
+ "modified": "2026-05-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Alaiy Os Erpnext",
+ "name": "Competitor Listing",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
