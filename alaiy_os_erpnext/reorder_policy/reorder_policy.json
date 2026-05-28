@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-05-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "warehouse",
+  "reorder_point",
+  "safety_stock",
+  "lead_time_days",
+  "preferred_supplier",
+  "reorder_qty",
+  "section_cost",
+  "unit_cost_cny",
+  "unit_cost_inr"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "reorder_point",
+   "fieldtype": "Int",
+   "label": "Reorder Point",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "safety_stock",
+   "fieldtype": "Int",
+   "label": "Safety Stock"
+  },
+  {
+   "fieldname": "lead_time_days",
+   "fieldtype": "Int",
+   "label": "Lead Time (Days)",
+   "default": "14"
+  },
+  {
+   "fieldname": "preferred_supplier",
+   "fieldtype": "Link",
+   "label": "Preferred Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "reorder_qty",
+   "fieldtype": "Int",
+   "label": "Reorder Qty"
+  },
+  {
+   "fieldname": "section_cost",
+   "fieldtype": "Section Break",
+   "label": "Cost"
+  },
+  {
+   "fieldname": "unit_cost_cny",
+   "fieldtype": "Currency",
+   "label": "Unit Cost (CNY)",
+   "options": "CNY"
+  },
+  {
+   "fieldname": "unit_cost_inr",
+   "fieldtype": "Currency",
+   "label": "Unit Cost (INR)",
+   "options": "INR"
+  }
+ ],
+ "links": [],
+ "modified": "2026-05-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Alaiy Os Erpnext",
+ "name": "Reorder Policy",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "item_code",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1
+}
