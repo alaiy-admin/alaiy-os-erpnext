@@ -10,9 +10,11 @@ scheduler_events = {
     "all": [
         "alaiy_os_erpnext.scheduler.shopify_order_sync.sync_shopify_orders"
     ],
-    "15_minutes": [
-        "alaiy_os_erpnext.scheduler.alert_generator.generate_alerts"
-    ],
+    "cron": {
+        "*/15 * * * *": [
+            "alaiy_os_erpnext.scheduler.alert_generator.generate_alerts"
+        ],
+    },
     "hourly": [
         "alaiy_os_erpnext.scheduler.competitor_pricer.update_competitor_prices"
     ],

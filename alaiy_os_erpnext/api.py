@@ -339,21 +339,18 @@ def ask_alaiy(question):
     import re
     q = (question or "").lower()
 
-    # ── Reorder / stock ─────────────────────────────────────────
+    # Reorder / stock
     if re.search(r"reorder|stock|inventory|low", q):
-        from alaiy_os_erpnext.api import get_inventory_with_velocity
         items = get_inventory_with_velocity()
         low = [i for i in items if (i.get("days_cover") or 999) <= 14]
         if not low:
             return {"answer": "No SKUs are below the 14-day reorder threshold right now."}
         lines = []
         for i in low:
-            lines.append(f"• {i['item_code']} — {i.get('actual_qty',0)} units, {i.get('days_cover','?')}d cover")
-        return {"answer": "SKUs needing reorder:
-" + "
-".join(lines)}
+            lines.append(f"- {i['item_code']} - {i.get('actual_qty', 0)} units, {i.get('days_cover', '?')}d cover")
+        return {"answer": "SKUs needing reorder:\n" + "\n".join(lines)}
 
-    # ── Late shipment ─────────────────────────────────────────────
+    # Late shipment
     if re.search(r"late|shipment|ship today|dispatch", q):
         today = frappe.utils.today()
         orders = frappe.get_all(
@@ -364,32 +361,39 @@ def ask_alaiy(question):
         )
         if not orders:
             return {"answer": "No orders at late-shipment risk today."}
-        lines = [f"• {o['name']} — {o['customer']} (due {o['delivery_date']})".replace("None", "?") for o in orders]
-        return {"answer": f"{len(orders)} order(s) at late-shipment risk:
-" + "
-".join(lines)}
+        lines = [
+            f"- {o['name']} - {o['customer']} (due {o['delivery_date']})".replace("None", "?")
+            for o in orders
+        ]
+        return {"answer": f"{len(orders)} order(s) at late-shipment risk:\n" + "\n".join(lines)}
 
-    # ── Return rate ─────────────────────────────────────────────
+    # Return rate
     if re.search(r"return|refund", q):
-        from datetime import datetime, timedelta
-        week_ago = (datetime.today() - timedelta(days=7)).strftime("%Y-%m-%d")
-        total = frappe.db.count("Sales Order", {"transaction_date": [">=", week_ago], "status": "!": "Cancelled"}) or 1
-        returned = frappe.db.count("Sales Order", {"transaction_date": [">=", week_ago], "status": "Cancelled"}) or 0
+        week_ago = frappe.utils.add_days(frappe.utils.today(), -7)
+        total = frappe.db.count("Sales Order", {"transaction_date": [">=", week_ago]}) or 1
+        returned = frappe.db.count("Sales Order", {
+            "transaction_date": [">=", week_ago],
+            "status": "Cancelled",
+        }) or 0
         rate = round(returned / total * 100, 1)
         return {"answer": f"Return/cancel rate this week: {rate}% ({returned} of {total} orders)."}
 
-    # ── Revenue ─────────────────────────────────────────────────
+    # Revenue
     if re.search(r"revenue|sales|today", q):
         kpi = get_kpi_summary()
         today_rev = kpi.get("revenue_today", 0)
-        yest_rev  = kpi.get("revenue_yesterday", 0)
+        yest_rev = kpi.get("revenue_yesterday", 0)
         pct = round((today_rev - yest_rev) / yest_rev * 100, 1) if yest_rev else 0
-        direction = "↑" if pct >= 0 else "↓"
-        return {"answer": f"Today: ₹{today_rev:,.0f} ({kpi.get('orders_today',0)} orders)
-Yesterday: ₹{yest_rev:,.0f}
-{direction} {abs(pct)}% vs yesterday"}
+        direction = "up" if pct >= 0 else "down"
+        return {
+            "answer": (
+                f"Today: Rs{today_rev:,.0f} ({kpi.get('orders_today', 0)} orders)\n"
+                f"Yesterday: Rs{yest_rev:,.0f}\n"
+                f"{direction} {abs(pct)}% vs yesterday"
+            )
+        }
 
-    # ── Account health ───────────────────────────────────────────
+    # Account health
     if re.search(r"health|odr|account", q):
         rows = get_account_health_latest()
         if not rows:
@@ -398,16 +402,19 @@ Yesterday: ₹{yest_rev:,.0f}
         lines = []
         for i in range(1, 5):
             name = r.get(f"metric_{i}_name")
-            val  = r.get(f"metric_{i}_value")
+            val = r.get(f"metric_{i}_value")
             status = r.get(f"metric_{i}_status", "ok")
             if name and val is not None:
-                icon = "✓" if status == "ok" else "⚠"
+                icon = "OK" if status == "ok" else "WARN"
                 lines.append(f"{icon} {name}: {val:.1f}% ({status})")
-        return {"answer": "Account health (" + (r.get("marketplace") or "Amazon") + "):
-" + "
-".join(lines)}
+        marketplace = r.get("marketplace") or "Amazon"
+        return {"answer": f"Account health ({marketplace}):\n" + "\n".join(lines)}
 
-    # ── Generic fallback ─────────────────────────────────────────
+    # Generic fallback
     return {
-        "answer": f"I couldn't find specific data for "{question}". Try: "Which SKUs need reorder?", "Revenue today", "Late shipment risk", "Return rate", "Account health".",
+        "answer": (
+            f'No specific data found for "{question}". '
+            'Try: "Which SKUs need reorder?", "Revenue today", '
+            '"Late shipment risk", "Return rate", "Account health".'
+        ),
     }
