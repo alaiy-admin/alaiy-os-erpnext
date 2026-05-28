@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 def get_feed_items():
     """Returns all open/snoozed Marketplace Alert rows sorted by severity."""
     now = frappe.utils.now_datetime()
+    severity_order = {"fire": 1, "warn": 2, "info": 3}
     alerts = frappe.get_all(
         "Marketplace Alert",
         filters=[["status", "in", ["Open", "Snoozed"]]],
@@ -16,7 +17,7 @@ def get_feed_items():
             "item_code", "sales_order", "marketplace", "status",
             "snoozed_until", "ai_note", "creation",
         ],
-        order_by="CASE severity WHEN 'fire' THEN 1 WHEN 'warn' THEN 2 ELSE 3 END, creation desc",
+        order_by="creation desc",
         limit=50,
     )
     result = []
@@ -24,6 +25,7 @@ def get_feed_items():
         if a.status == "Snoozed" and a.snoozed_until and a.snoozed_until > now:
             continue
         result.append(a)
+    result.sort(key=lambda x: (severity_order.get(x.get("severity", "info"), 3), str(x.get("creation", ""))))
     return result
 
 
