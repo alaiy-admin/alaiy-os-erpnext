@@ -1,0 +1,207 @@
+{
+ "actions": [],
+ "autoname": "AHS-.YYYY.-.MM.-.DD.-{marketplace}",
+ "creation": "2026-05-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "marketplace",
+  "connector",
+  "snapshot_date",
+  "section_metric1",
+  "metric_1_name",
+  "metric_1_value",
+  "metric_1_limit",
+  "metric_1_status",
+  "section_metric2",
+  "metric_2_name",
+  "metric_2_value",
+  "metric_2_limit",
+  "metric_2_status",
+  "section_metric3",
+  "metric_3_name",
+  "metric_3_value",
+  "metric_3_limit",
+  "metric_3_status",
+  "section_metric4",
+  "metric_4_name",
+  "metric_4_value",
+  "metric_4_limit",
+  "metric_4_status",
+  "section_claims",
+  "open_claims",
+  "section_raw",
+  "raw_response"
+ ],
+ "fields": [
+  {
+   "fieldname": "marketplace",
+   "fieldtype": "Select",
+   "label": "Marketplace",
+   "options": "amazon_in\namazon_us\nflipkart",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "connector",
+   "fieldtype": "Data",
+   "label": "Connector"
+  },
+  {
+   "fieldname": "snapshot_date",
+   "fieldtype": "Date",
+   "label": "Snapshot Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_metric1",
+   "fieldtype": "Section Break",
+   "label": "Metric 1"
+  },
+  {
+   "fieldname": "metric_1_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "metric_1_value",
+   "fieldtype": "Float",
+   "label": "Value"
+  },
+  {
+   "fieldname": "metric_1_limit",
+   "fieldtype": "Float",
+   "label": "Limit"
+  },
+  {
+   "fieldname": "metric_1_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "ok\nwarn\nfire"
+  },
+  {
+   "fieldname": "section_metric2",
+   "fieldtype": "Section Break",
+   "label": "Metric 2"
+  },
+  {
+   "fieldname": "metric_2_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "metric_2_value",
+   "fieldtype": "Float",
+   "label": "Value"
+  },
+  {
+   "fieldname": "metric_2_limit",
+   "fieldtype": "Float",
+   "label": "Limit"
+  },
+  {
+   "fieldname": "metric_2_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "ok\nwarn\nfire"
+  },
+  {
+   "fieldname": "section_metric3",
+   "fieldtype": "Section Break",
+   "label": "Metric 3"
+  },
+  {
+   "fieldname": "metric_3_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "metric_3_value",
+   "fieldtype": "Float",
+   "label": "Value"
+  },
+  {
+   "fieldname": "metric_3_limit",
+   "fieldtype": "Float",
+   "label": "Limit"
+  },
+  {
+   "fieldname": "metric_3_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "ok\nwarn\nfire"
+  },
+  {
+   "fieldname": "section_metric4",
+   "fieldtype": "Section Break",
+   "label": "Metric 4"
+  },
+  {
+   "fieldname": "metric_4_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "metric_4_value",
+   "fieldtype": "Float",
+   "label": "Value"
+  },
+  {
+   "fieldname": "metric_4_limit",
+   "fieldtype": "Float",
+   "label": "Limit"
+  },
+  {
+   "fieldname": "metric_4_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "ok\nwarn\nfire"
+  },
+  {
+   "fieldname": "section_claims",
+   "fieldtype": "Section Break",
+   "label": "Claims"
+  },
+  {
+   "fieldname": "open_claims",
+   "fieldtype": "Int",
+   "label": "Open A-to-Z Claims"
+  },
+  {
+   "fieldname": "section_raw",
+   "fieldtype": "Section Break",
+   "label": "Raw"
+  },
+  {
+   "fieldname": "raw_response",
+   "fieldtype": "Long Text",
+   "label": "Raw API Response"
+  }
+ ],
+ "links": [],
+ "modified": "2026-05-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Alaiy Os Erpnext",
+ "name": "Account Health Snapshot",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "snapshot_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
