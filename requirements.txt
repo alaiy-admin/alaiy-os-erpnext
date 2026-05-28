@@ -1,0 +1,5 @@
+frappe
+python-amazon-sp-api>=0.17.0
+requests>=2.31.0
+gql[requests]>=3.5.0
+httpx>=0.25.0
